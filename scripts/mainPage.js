@@ -1,6 +1,4 @@
 function showInfo() {
-  let temp;
-  let popUp = document.getElementById("popLearn");
   let sec1 = document.getElementById("sect1");
   let p1 = document.createElement("p");
   let div1 = document.createElement("div");
