@@ -189,4 +189,6 @@ fotter >div{
     opacity: 1;
     }
 
-
+    input.invalid {
+        background-color: #ffdddd;
+    }
