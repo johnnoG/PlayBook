@@ -205,3 +205,19 @@ fotter >div{
         margin-top: 2px;
         margin-bottom: 0px;
     }
+
+    .last-div{
+      float: left;
+      margin-left: 40px;
+
+    }
+    .contact{
+        float: left;
+        margin-left: 250px ;
+    }
+
+    .last-div >h3{
+        color:red;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
