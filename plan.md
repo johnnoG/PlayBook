@@ -39,11 +39,11 @@
 
 ## Back-End
 
-- Create DB and relevent tables: add schema to the project as a different file **Tohar**
-- Create DB instance **Yonatan**
-- Create Server **Yonatan**
-- Create login endpoint: validate data in request from the DB **Yonatan**
-- Create sign-up endpoint: store received data in DB **Yonatan**
+- **Tohar-** Create DB and relevent tables: add schema to the project as a different file
+- **Yonatan-** Create DB instance
+- **Yonatan-** Create Server
+- **Yonatan-** Create login endpoint: validate data in request from the DB
+- **Yonatan-** Create sign-up endpoint: store received data in DB
 - Create profile page endpoint: send all user data from DB to front end
 - Create game page endpoint: get relevant data from DB and send to front end
 - Create finish page endpoint: save ratings to relevant tables in DB
