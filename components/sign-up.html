@@ -7,6 +7,16 @@
     <link rel="stylesheet" href="../styles/sign-up.css" />
   </head>
   <body>
+    <nav>
+      <div class="container">
+        <div>
+          <a href="#"><span>Home</span></a>
+        </div>
+        <div><a href="#" onclick="needToLog()">Profile</a></div>
+        <div><a href="#" onclick="needToLog()">My games</a></div>
+        <div><a href="#" onclick="openForm()">Log in</a></div>
+      </div>
+    </nav>
     <form id="regForm" action="">
       <h1>Register:</h1>
 
@@ -23,14 +33,16 @@
 
       <div class="tab">
         Contact Info:
-        <p><input type="email"  placeholder="E-mail..." oninput="this.className = ''" /></p>
-        <p><input type="tel" placeholder="Phone..." oninput="this.className = ''" /></p>
+        <p><label><input type="email"  placeholder="E-mail..." oninput="this.className = ''" /></label></p>
+        <p><label><input type="tel" placeholder="Phone..." oninput="this.className = ''" /></label></p>
       </div>
 
       <div class="tab">
         Birthday:
         <p><input type="date"  placeholder="dd/mm/yyyy" oninput="this.className = ''" /></p>
       </div>
+
+
 
       <div class="tab">
         Login Info:
@@ -99,6 +111,7 @@
         <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
+
       </div>
     </form>
   </body>
