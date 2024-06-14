@@ -17,7 +17,7 @@
         <div><a href="#" onclick="openForm()">Log in</a></div>
       </div>
     </nav>
-    <form id="regForm" action="">
+    <form id="regForm" action=""  method="post">
       <h1>Register:</h1>
 
       <!-- One "tab" for each step in the form: -->
@@ -42,7 +42,15 @@
         <p><input type="date"  placeholder="dd/mm/yyyy" oninput="this.className = ''" /></p>
       </div>
 
-
+      <div class="tab">
+        my Rate:
+        <p>
+          <div class="slidecontainer">
+          <input type="range" min="1" max="8" value="1" class="slider" id="myRange">
+          <p>Value: <span id="demo"></span></p>
+        </div>
+      </p>
+      </div>
 
       <div class="tab">
         Login Info:
@@ -102,6 +110,7 @@
 
       <!-- Circles which indicates the steps of the form: -->
       <div style="text-align: center; margin-top: 40px">
+        <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
