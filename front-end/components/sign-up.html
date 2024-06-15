@@ -3,55 +3,82 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Sign up page</title>
     <link rel="stylesheet" href="../styles/sign-up.css" />
   </head>
   <body>
-    <form id="regForm" action="">
+    <nav>
+      <div class="container">
+        <div>
+          <a href="#"><span>Home</span></a>
+        </div>
+        <div><a href="#" onclick="needToLog()">Profile</a></div>
+        <div><a href="#" onclick="needToLog()">My games</a></div>
+        <div><a href="#" onclick="openForm()">Log in</a></div>
+      </div>
+    </nav>
+    <form id="regForm" action=""  method="post">
       <h1>Register:</h1>
 
       <!-- One "tab" for each step in the form: -->
       <div class="tab">
         Name:
         <p>
-          <input placeholder="First name..." oninput="this.className = ''" />
+          <input type="text" placeholder="First name..." oninput="this.className = ''" />
         </p>
         <p>
-          <input placeholder="Last name..." oninput="this.className = ''" />
+          <input type="text"  placeholder="Last name..." oninput="this.className = ''" />
         </p>
       </div>
 
       <div class="tab">
         Contact Info:
-        <p><input placeholder="E-mail..." oninput="this.className = ''" /></p>
-        <p><input placeholder="Phone..." oninput="this.className = ''" /></p>
+        <p><label><input type="email"  placeholder="E-mail..." oninput="this.className = ''" /></label></p>
+        <p><label><input type="tel" placeholder="Phone..." oninput="this.className = ''" /></label></p>
       </div>
 
       <div class="tab">
         Birthday:
-        <p><input placeholder="dd" oninput="this.className = ''" /></p>
-        <p><input placeholder="mm" oninput="this.className = ''" /></p>
-        <p><input placeholder="yyyy" oninput="this.className = ''" /></p>
+        <p><input type="date"  placeholder="dd/mm/yyyy" oninput="this.className = ''" /></p>
+      </div>
+
+      <div class="tab">
+        my Rate:
+        <p>
+          <div class="slidecontainer">
+          <input type="range" min="1" max="8" value="1" class="slider" id="myRange">
+          <p>Value: <span id="demo"></span></p>
+        </div>
+      </p>
       </div>
 
       <div class="tab">
         Login Info:
-        <p><input placeholder="Username..." oninput="this.className = ''" /></p>
-        <p><input placeholder="Password..." oninput="this.className = ''" /></p>
+        <p><input type="text" placeholder="Username..." oninput="this.className = ''" /></p>
+        <p><input type="password"  placeholder="Password..." oninput="this.className = ''" /></p>
       </div>
 
       <div class="tab">
         Strong Foot:
-        <p>
-          <input placeholder="Right/Left..." oninput="this.className = ''" />
-        </p>
+        <div class="custom-select">
+          <select>
+            <option value="Right/Left">Right/Left...</option>
+            <option value="Right">Right</option>
+            <option value="Left">Left</option>
+          </select>
+        </div>
       </div>
 
       <div class="tab">
         Preffered Position:
-        <p>
-          <input placeholder="ATT/DEF/GK" oninput="this.className = ''" />
-        </p>
+        <div class="custom-select">
+          <select>
+            <option value="ATT/DEF/GK">ATT/DEF/GK</option>
+            <option value="ATT">ATT</option>
+            <option value="DEF">DEF</option>
+            <option value="GK">GK</option>
+          </select>
+        </div>
       </div>
 
       <div class="tab">
@@ -65,6 +92,11 @@
         <p>
           <input placeholder="City..." oninput="this.className = ''" />
         </p>
+      </div>
+
+      <div class="tab">
+        picture:
+        <p><label>Upload your picture: <input type="file" name="myPic"></label></p>
       </div>
 
       <div style="overflow: auto">
@@ -86,6 +118,9 @@
         <span class="step"></span>
         <span class="step"></span>
         <span class="step"></span>
+        <span class="step"></span>
+        <span class="step"></span>
+
       </div>
     </form>
   </body>
