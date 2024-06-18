@@ -1,5 +1,10 @@
 <?php
-require_once 'db.php';
+require_once 'Database.php';
+
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 $db = Database::getInstance();
 $conn = $db->getConnection();
@@ -19,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $city = $_POST['city'];
 
     // Handle file upload
+    $picture = null;
     if (isset($_FILES['myPic']) && $_FILES['myPic']['error'] == 0) {
         $upload_dir = 'uploads/';
         if (!is_dir($upload_dir)) {
@@ -27,11 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $upload_file = $upload_dir . basename($_FILES['myPic']['name']);
         if (move_uploaded_file($_FILES['myPic']['tmp_name'], $upload_file)) {
             $picture = $upload_file;
-        } else {
-            $picture = null;
         }
-    } else {
-        $picture = null;
     }
 
     $data = [
@@ -51,6 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Prepare the SQL query
     $query = "INSERT INTO Players (Email, FullName, Birthday, Password, StrongFoot, PreferredPosition, Nickname, City, Rating, Picture, Phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($query);
+    if (!$stmt) {
+        echo json_encode(['success' => false, 'message' => 'Prepare failed: (' . $conn->errno . ') ' . $conn->error]);
+        exit;
+    }
+
     $stmt->bind_param(
         "sssssssssss",
         $data['Email'],
@@ -69,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($stmt->execute()) {
         echo json_encode(['success' => true, 'message' => 'Registration successful!']);
     } else {
-        echo json_encode(['success' => false, 'message' => 'Registration failed. Please try again.']);
+        echo json_encode(['success' => false, 'message' => 'Execute failed: (' . $stmt->errno . ') ' . $stmt->error]);
     }
 
     $stmt->close();
