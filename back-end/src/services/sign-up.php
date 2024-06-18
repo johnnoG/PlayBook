@@ -6,12 +6,12 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// Log errors to a file
+ini_set('log_errors', 1);
+ini_set('error_log', 'error_log.txt');
+
 $db = Database::getInstance();
 $conn = $db->getConnection();
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $first_name = $_POST['first_name'];
@@ -32,15 +32,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_FILES['myPic']) && $_FILES['myPic']['error'] === UPLOAD_ERR_OK) {
         $upload_dir = 'uploads/';
         if (!is_dir($upload_dir)) {
-            mkdir($upload_dir, 0777, true);
+            if (!mkdir($upload_dir, 0777, true)) {
+                error_log('Failed to create upload directory.');
+                echo json_encode(['success' => false, 'message' => 'Failed to create upload directory.']);
+                exit;
+            }
         }
         $upload_file = $upload_dir . basename($_FILES['myPic']['name']);
-        if (move_uploaded_file($_FILES['myPic']['tmp_name'], $upload_file)) {
-            $picture = $upload_file;
-        } else {
+        if (!move_uploaded_file($_FILES['myPic']['tmp_name'], $upload_file)) {
+            error_log('Failed to move uploaded file.');
             echo json_encode(['success' => false, 'message' => 'Failed to move uploaded file.']);
             exit;
         }
+        $picture = $upload_file;
     } else {
         $upload_error = $_FILES['myPic']['error'];
         $upload_error_message = match ($upload_error) {
@@ -53,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             UPLOAD_ERR_EXTENSION => 'File upload stopped by extension.',
             default => 'Unknown upload error.'
         };
+        error_log('File upload error: ' . $upload_error_message);
         echo json_encode(['success' => false, 'message' => 'File upload error: ' . $upload_error_message]);
         exit;
     }
@@ -72,14 +77,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ];
 
     // Prepare the SQL query
-    $query = "INSERT INTO `Players` (Email, FullName, Birthday, Password, StrongFoot, PreferredPosition, Nickname, City, Rating, Picture, Phone) VALUES ({$data['Email']},{$data['FullName']},{$data['Birthday']}, {$data['Password']} ,{$data['StrongFoot']}, {$data['PreferredPosition']}, {$data['Nickname']}, {$data['City']}, {$data['Rating']}, {$data['Picture']}, {$data['Phone']})";
-
-    if ($conn->query($query) === TRUE) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $query . "<br>" . $conn->error;
+    $query = "INSERT INTO `Players` (Email, FullName, Birthday, Password, StrongFoot, PreferredPosition, Nickname, City, Rating, Picture, Phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($query);
+    if (!$stmt) {
+        error_log('Prepare failed: (' . $conn->errno . ') ' . $conn->error);
+        echo json_encode(['success' => false, 'message' => 'Prepare failed: (' . $conn->errno . ') ' . $conn->error]);
+        exit;
     }
 
+    $stmt->bind_param(
+        "sssssssssss",
+        $data['Email'],
+        $data['FullName'],
+        $data['Birthday'],
+        $data['Password'],
+        $data['StrongFoot'],
+        $data['PreferredPosition'],
+        $data['Nickname'],
+        $data['City'],
+        $data['Rating'],
+        $data['Picture'],
+        $data['Phone']
+    );
+
+    if ($stmt->execute()) {
+        echo json_encode(['success' => true, 'message' => 'Registration successful!']);
+    } else {
+        error_log('Execute failed: (' . $stmt->errno . ') ' . $stmt->error);
+        echo json_encode(['success' => false, 'message' => 'Execute failed: (' . $stmt->errno . ') ' . $stmt->error]);
+    }
+
+    $stmt->close();
     $conn->close();
 } else {
     echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
