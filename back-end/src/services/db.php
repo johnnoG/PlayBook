@@ -3,7 +3,7 @@ class Database
 {
     private $servername = "sql305.byethost9.com";
     private $username = "b9_36704350";
-    private $password = "@ToharyY0123";
+    private $password = "@ToharYO123";
     private $dbname = "b9_36704350_PlayBook";
     private $conn;
 
