@@ -23,35 +23,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nickname = $_POST['nickname'];
     $city = $_POST['city'];
 
-    // Handle file upload
-    $picture = null;
-    if (isset($_FILES['myPic']) && $_FILES['myPic']['error'] === UPLOAD_ERR_OK) {
-        $upload_dir = 'uploads/';
-        if (!is_dir($upload_dir)) {
-            mkdir($upload_dir, 0777, true);
-        }
-        $upload_file = $upload_dir . basename($_FILES['myPic']['name']);
-        if (move_uploaded_file($_FILES['myPic']['tmp_name'], $upload_file)) {
-            $picture = $upload_file;
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Failed to move uploaded file.']);
-            exit;
-        }
-    } else {
-        $upload_error = $_FILES['myPic']['error'];
-        $upload_error_message = match ($upload_error) {
-            UPLOAD_ERR_INI_SIZE => 'The uploaded file exceeds the upload_max_filesize directive in php.ini.',
-            UPLOAD_ERR_FORM_SIZE => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.',
-            UPLOAD_ERR_PARTIAL => 'The uploaded file was only partially uploaded.',
-            UPLOAD_ERR_NO_FILE => 'No file was uploaded.',
-            UPLOAD_ERR_NO_TMP_DIR => 'Missing a temporary folder.',
-            UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk.',
-            UPLOAD_ERR_EXTENSION => 'File upload stopped by extension.',
-            default => 'Unknown upload error.'
-        };
-        echo json_encode(['success' => false, 'message' => 'File upload error: ' . $upload_error_message]);
-        exit;
-    }
+    // // Handle file upload
+    // $picture = null;
+    // if (isset($_FILES['myPic']) && $_FILES['myPic']['error'] === UPLOAD_ERR_OK) {
+    //     $upload_dir = 'uploads/';
+    //     if (!is_dir($upload_dir)) {
+    //         mkdir($upload_dir, 0777, true);
+    //     }
+    //     $upload_file = $upload_dir . basename($_FILES['myPic']['name']);
+    //     if (move_uploaded_file($_FILES['myPic']['tmp_name'], $upload_file)) {
+    //         $picture = $upload_file;
+    //     } else {
+    //         echo json_encode(['success' => false, 'message' => 'Failed to move uploaded file.']);
+    //         exit;
+    //     }
+    // } else {
+    //     $upload_error = $_FILES['myPic']['error'];
+    //     $upload_error_message = match ($upload_error) {
+    //         UPLOAD_ERR_INI_SIZE => 'The uploaded file exceeds the upload_max_filesize directive in php.ini.',
+    //         UPLOAD_ERR_FORM_SIZE => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.',
+    //         UPLOAD_ERR_PARTIAL => 'The uploaded file was only partially uploaded.',
+    //         UPLOAD_ERR_NO_FILE => 'No file was uploaded.',
+    //         UPLOAD_ERR_NO_TMP_DIR => 'Missing a temporary folder.',
+    //         UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk.',
+    //         UPLOAD_ERR_EXTENSION => 'File upload stopped by extension.',
+    //         default => 'Unknown upload error.'
+    //     };
+    //     echo json_encode(['success' => false, 'message' => 'File upload error: ' . $upload_error_message]);
+    //     exit;
+    // }
 
     $data = [
         'Email' => $email,
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'Nickname' => $nickname,
         'City' => $city,
         'Rating' => $rate,
-        'Picture' => $picture,
+        'Picture' => "",
         'Phone' => $phone
     ];
 
