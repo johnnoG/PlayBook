@@ -19,7 +19,7 @@
         </div>
         <div><a href="#" onclick="profile()">Profile</a></div>
         <div><a href="#">My games</a></div>
-        <div><a href="#">book a game</a></div>
+        <div><a href="#">Book a game</a></div>
       </div>
     </nav>
     <section class="section about-section gray-bg" id="about">
@@ -29,44 +29,44 @@
             <div class="about-text go-to">
               <h3 class="dark-color">Profile</h3>
               <h6 class="theme-color lead">
-                Soccer player in position//need to add//
+                Soccer player in position <span id="position">database</span>
               </h6>
-              <p>data base about</p>
+              <p id="about">data base about</p>
               <div class="row about-list">
                 <div class="col-md-6">
                   <div class="media">
                     <label>Birthday</label>
-                    <p class="data">data base</p>
+                    <p class="data" id="birthday">data base</p>
                   </div>
                   <div class="media">
                     <label>Age</label>
-                    <p class="data">data base</p>
+                    <p class="data" id="age">data base</p>
                   </div>
                   <div class="media">
                     <label>City</label>
-                    <p class="data">data base</p>
+                    <p class="data" id="city">data base</p>
                   </div>
                   <div class="media">
                     <label>Position</label>
-                    <p class="data">data base</p>
+                    <p class="data" id="preferred-position">data base</p>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="media">
                     <label>E-mail</label>
-                    <p class="data">data base</p>
+                    <p class="data" id="email">data base</p>
                   </div>
                   <div class="media">
                     <label>Phone</label>
-                    <p class="data">data base</p>
+                    <p class="data" id="phone">data base</p>
                   </div>
                   <div class="media">
                     <label>Foot</label>
-                    <p class="data">data base</p>
+                    <p class="data" id="strong-foot">data base</p>
                   </div>
                   <div class="media">
                     <label>Gender</label>
-                    <p class="data">data base</p>
+                    <p class="data" id="gender">data base</p>
                   </div>
                 </div>
               </div>
@@ -75,6 +75,7 @@
           <div class="col-lg-6">
             <div class="about-avatar">
               <img
+                id="profile-picture"
                 src="https://bootdey.com/img/Content/avatar/avatar7.png"
                 title=""
                 alt=""
@@ -86,44 +87,37 @@
           <div class="row">
             <div class="col-6 col-lg-3">
               <div class="count-data text-center">
-                <h6 class="count h2" data-to="500" data-speed="500">
-                  data base
-                </h6>
+                <h6 class="count h2" id="played">data base</h6>
                 <p class="m-0px font-w-600">Played</p>
               </div>
             </div>
             <div class="col-6 col-lg-3">
               <div class="count-data text-center">
-                <h6 class="count h2" data-to="150" data-speed="150">
-                  data base
-                </h6>
+                <h6 class="count h2" id="rating">data base</h6>
                 <p class="m-0px font-w-600">Rating</p>
               </div>
             </div>
             <div class="col-6 col-lg-3">
               <div class="count-data text-center">
-                <h6 class="count h2" data-to="850" data-speed="850">
-                  data base
-                </h6>
+                <h6 class="count h2" id="fields">data base</h6>
                 <p class="m-0px font-w-600">Fields</p>
               </div>
             </div>
             <div class="col-6 col-lg-3">
               <div class="count-data text-center">
-                <h6 class="count h2" data-to="190" data-speed="190">
-                  data basse
-                </h6>
-                <p class="m-0px font-w-600">likes</p>
+                <h6 class="count h2" id="likes">data base</h6>
+                <p class="m-0px font-w-600">Likes</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <button id="edit" onclick="edit()">edit profile</button>
+      <button id="edit" onclick="edit()">Edit profile</button>
       <button id="saveChanges" onclick="saveChanges()" style="display: none">
-        saveChanges
+        Save Changes
       </button>
     </section>
+
     <script src="../scripts/About_me.js"></script>
   </body>
 </html>

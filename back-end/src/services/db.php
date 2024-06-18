@@ -28,26 +28,13 @@ class Database
         return self::$instance;
     }
 
-    // Method to check user credentials
-    public function verifyUser($email, $password)
+    // Method to get the connection
+    public function getConnection()
     {
-        $query = "SELECT password FROM users WHERE email = ?";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $stmt->store_result();
-
-        if ($stmt->num_rows > 0) {
-            $stmt->bind_result($hashed_password);
-            $stmt->fetch();
-            if (password_verify($password, $hashed_password)) {
-                return true;
-            }
-        }
-        return false;
+        return $this->conn;
     }
 
-    // Method to insert data into a table
+    // Modified insertData function
     public function insertData($table, $data)
     {
         $fields = implode(", ", array_keys($data));
@@ -61,29 +48,9 @@ class Database
         return $stmt->execute();
     }
 
-    // Method to close the connection 
+    // Method to close the connection (optional, for cleanup)
     public function closeConnection()
     {
         $this->conn->close();
     }
 }
-/*
-// Usage example:
-$db = Database::getInstance();
-
-// Verify user
-if ($db->verifyUser("user@example.com", "user_password")) {
-    echo "Login successful!";
-} else {
-    echo "Invalid email or password.";
-}
-
-// Insert data
-$data = ["fieldID" => "123456", "FieldType" => "soccer"];
-if ($db->insertData("field", $data)) {
-    echo "Data inserted successfully!";
-} else {
-    echo "Error inserting data.";
-}
-
-*/
