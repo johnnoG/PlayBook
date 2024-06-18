@@ -95,7 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     );
 
     if ($stmt->execute()) {
-        echo "New record created successfully";
+        // Redirect to MainPage.html after successful insertion
+        header("Location: /front-end/components/MainPage.html");
+        exit(); // Ensure script stops executing after the redirection
     } else {
         echo "Error: " . $stmt->error;
     }
