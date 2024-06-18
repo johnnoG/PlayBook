@@ -2,17 +2,21 @@
 require_once 'db.php';
 
 $db = Database::getInstance();
+$conn = $db->getConnection();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
     $email = $_POST['email'];
-    $full_name = $_POST['first_name'] . ' ' . $_POST['last_name'];
+    $phone = $_POST['phone'];
     $birthday = $_POST['birthday'];
+    $rate = $_POST['rate'];
+    $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password
     $strong_foot = $_POST['strong_foot'];
     $preferred_position = $_POST['position'];
     $nickname = $_POST['nickname'];
     $city = $_POST['city'];
-    $rating = $_POST['rate'];
 
     // Handle file upload
     if (isset($_FILES['myPic']) && $_FILES['myPic']['error'] == 0) {
@@ -32,24 +36,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $data = [
         'Email' => $email,
-        'FullName' => $full_name,
+        'FullName' => $first_name . ' ' . $last_name,
         'Birthday' => $birthday,
         'Password' => $password,
         'StrongFoot' => $strong_foot,
         'PreferredPosition' => $preferred_position,
         'Nickname' => $nickname,
         'City' => $city,
-        'Rating' => $rating,
-        'Picture' => $picture
+        'Rating' => $rate,
+        'Picture' => $picture,
+        'Phone' => $phone
     ];
 
-    $result = $db->insertData('Players', $data);
+    // Prepare the SQL query
+    $query = "INSERT INTO Players (Email, FullName, Birthday, Password, StrongFoot, PreferredPosition, Nickname, City, Rating, Picture, Phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param(
+        "sssssssssss",
+        $data['Email'],
+        $data['FullName'],
+        $data['Birthday'],
+        $data['Password'],
+        $data['StrongFoot'],
+        $data['PreferredPosition'],
+        $data['Nickname'],
+        $data['City'],
+        $data['Rating'],
+        $data['Picture'],
+        $data['Phone']
+    );
 
-    if ($result) {
+    if ($stmt->execute()) {
         echo json_encode(['success' => true, 'message' => 'Registration successful!']);
     } else {
         echo json_encode(['success' => false, 'message' => 'Registration failed. Please try again.']);
     }
+
+    $stmt->close();
+    $conn->close();
 } else {
     echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
 }
