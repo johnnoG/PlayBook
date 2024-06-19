@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->fetch();
         if (password_verify($password, $hashed_password)) {
             // Redirect to MainPage.html after successful login
-            header("Location: PlayBook/front-end/components/MainPage.html");
+            header('Location: http://toharhermon959.byethost9.com/PlayBook/front-end/components/MainPage.html');
             exit(); // Make sure to exit after the header redirection
         } else {
             echo json_encode(['success' => false, 'message' => 'Invalid email or password.']);

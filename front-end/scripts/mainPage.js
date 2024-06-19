@@ -34,13 +34,6 @@ function closeForm() {
   document.getElementById("myForm").style.display = "none";
 }
 
-function logIn() {
-  //TODO: send to backend to store in db
-  const email = validateEmail(document.getElementById("login-email").value);
-
-  const password = document.getElementById("login-password").value;
-}
-
 const validateEmail = (email) => {
   return String(email)
     .toLowerCase()
@@ -49,6 +42,6 @@ const validateEmail = (email) => {
     );
 };
 
-function needToLog(){
+function needToLog() {
   alert("You need to log in!");
 }
