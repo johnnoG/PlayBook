@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $birthday = $_POST['birthday'];
     $rate = $_POST['rate'];
     $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password
+    $password = $_POST['password'];
     $strong_foot = $_POST['strong_foot'];
     $preferred_position = $_POST['position'];
     $nickname = $_POST['nickname'];

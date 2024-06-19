@@ -31,13 +31,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($hashed_password);
+        $stmt->bind_result($stored_password);
         $stmt->fetch();
-        if (password_verify($password, $hashed_password)) {
+
+        // Debugging: Check if stored_password is fetched correctly
+        error_log("Stored Password from DB: " . $stored_password);
+
+        if ($password === $stored_password) {
+            // Debugging: Check if password verification succeeds
+            error_log("Password verification succeeded");
+
             // Redirect to MainPage.html after successful login
-            header('Location: http://toharhermon959.byethost9.com/PlayBook/front-end/components/MainPage.html');
-            exit(); // Make sure to exit after the header redirection
+            header("Location: http://toharhermon959.byethost9.com/PlayBook/front-end/components/MainPage.html");
+            exit();
         } else {
+            // Debugging: Check if password verification fails
+            error_log("Password verification failed");
             echo json_encode(['success' => false, 'message' => 'Invalid email or password.']);
         }
     } else {
