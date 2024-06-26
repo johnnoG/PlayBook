@@ -4,7 +4,7 @@ require_once 'db.php';
 $db = Database::getInstance();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    session_start();
+    session_start(); // Start or resume a session
 
     $email = $_POST['email'];
     $password = $_POST['psw'];
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Prepare the SQL query
-    $query = "SELECT Password, Verified FROM Players WHERE Email = ?";
+    $query = "SELECT Password FROM Players WHERE Email = ?";
     $stmt = $conn->prepare($query);
 
     if (!$stmt) {
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($stored_password, $verified);
+        $stmt->bind_result($stored_password);
         $stmt->fetch();
 
         // Debugging: Check if stored_password is fetched correctly
@@ -43,18 +43,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Debugging: Check if password verification succeeds
             error_log("Password verification succeeded");
 
-            if ($verified) {
-                // Set session variable for verified user
-                $_SESSION['user_verified'] = true;
+            // Set session variable for verified user
+            $_SESSION['user_verified'] = true;
 
-                // Redirect to main-page.html after successful login
-                header("Location: http://toharhermon959.byethost9.com/PlayBook/pages/main-page.html");
-                exit();
-            } else {
-                // User is not verified
-                $_SESSION['user_verified'] = false;
-                echo json_encode(['success' => false, 'message' => 'User is not verified.']);
-            }
+            // Redirect to main-page.html after successful login
+            header("Location: http://toharhermon959.byethost9.com/PlayBook/pages/main-page.html");
+            exit();
         } else {
             // Debugging: Check if password verification fails
             error_log("Password verification failed");
