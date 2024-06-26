@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const email = "user@example.com"; // Replace with the actual user's email or obtain it dynamically
-  fetch(`../../back-end/src/services/player-profile.php?email=${email}`)
+  fetch(`../services/player-profile.php?email=${email}`)
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
