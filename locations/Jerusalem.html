@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jerusalem</title>
+    <link rel="stylesheet" href="../styles/field.css" />
+  </head>
+
+  <body>
+    <nav>
+      <div class="containerNav">
+        <div>
+          <a href="#"><span>Home</span></a>
+        </div>
+        <div><a href="#" onclick="profile()">Profile</a></div>
+        <div><a href="#">My games</a></div>
+        <div><a href="#">book a game</a></div>
+      </div>
+    </nav>
+
+    <h1>Jerusalem</h1>
+    <h2>Soccer Fields</h2>
+    <div class="container">
+      <div class="field" onclick="navigateToField('field1TelAviv.html')">
+        <img src="../resources/field1.jpg" alt="Field 1" />
+        <p>Pitch Rating: 5</p>
+        <p>Players Capacity: 8</p>
+        <p>Surface: Asfalt</p>
+        <p>Address: --------</p>
+      </div>
+      <div class="field" onclick="navigateToField('field2TelAviv.html')">
+        <img src="../resources/field2.jpg" alt="Field 2" />
+        <p>Pitch Rating: 4.2</p>
+        <p>Players Capacity: 10</p>
+        <p>Surface: Synthetic Grass</p>
+        <p>Address: --------</p>
+      </div>
+      <div class="field" onclick="navigateToField('field3TelAviv.html')">
+        <img src="../resources/field3.jpg" alt="Field 3" />
+        <p>Pitch Rating: 4.8</p>
+        <p>Players Capacity: 10</p>
+        <p>Surface: Synthetic Grass</p>
+        <p>Address: --------</p>
+      </div>
+      <div class="field" onclick="navigateToField('field4TelAviv.html')">
+        <img src="../resources/field4.jpg" alt="Field 4" />
+        <p>Pitch Rating: 5</p>
+        <p>Players Capacity: 12</p>
+        <p>Surface: Grass</p>
+        <p>Address: --------</p>
+      </div>
+    </div>
+    <script>
+      function navigateToField(field) {
+        window.location.href = "./locations/" + field;
+      }
+    </script>
+  </body>
+</html>

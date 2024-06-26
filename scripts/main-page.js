@@ -34,14 +34,26 @@ function closeForm() {
   document.getElementById("myForm").style.display = "none";
 }
 
-const validateEmail = (email) => {
-  return String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-};
+function checkUserVerification() {
+  // This function should call a PHP script to check if the user is verified
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "../services/check-verification.php", false);
+  xhr.send(null);
+  return xhr.responseText === "true";
+}
 
 function needToLog() {
-  alert("You need to log in!");
+  if (!checkUserVerification()) {
+    alert("You need to log in!");
+    window.location.href = "sign-in.html";
+  }
+}
+
+function navigateToPage(page) {
+  if (checkUserVerification()) {
+    window.location.href = page;
+  } else {
+    alert("You need to log in!");
+    window.location.href = "sign-in.html";
+  }
 }

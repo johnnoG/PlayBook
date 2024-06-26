@@ -1,0 +1,229 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.containerNav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 10px 0;
+    /* Add some padding for better spacing */
+    background-color: #ffffff;
+    /* Optional: Add a background color to make it more visible */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Optional: Add some shadow for better visibility */
+}
+
+.containerNav div {
+    margin: 0 10px;
+    /* Add some margin to space out the items */
+}
+
+.containerNav a {
+    text-decoration: none;
+    color: #333;
+    /* Ensure the text color is visible */
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #333;
+    background: -webkit-linear-gradient(#2ECC71, #3498DB);
+    background: linear-gradient(#2ECC71, #3498DB);
+    /* Standard version */
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* Standard version */
+    -webkit-text-fill-color: transparent;
+}
+
+.cube {
+    width: 200px;
+    height: 200px;
+    background-color: #2ECC71;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.cube:hover {
+    background-color: #27AE60;
+    transform: scale(1.05);
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.containerNav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 10px 0;
+    /* Add some padding for better spacing */
+    background-color: #ffffff;
+    /* Optional: Add a background color to make it more visible */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Optional: Add some shadow for better visibility */
+}
+
+.containerNav div {
+    margin: 0 10px;
+    /* Add some margin to space out the items */
+}
+
+.containerNav a {
+    text-decoration: none;
+    color: #333;
+    /* Ensure the text color is visible */
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #333;
+    background: -webkit-linear-gradient(#2ECC71, #3498DB);
+    background: linear-gradient(#2ECC71, #3498DB);
+    /* Standard version */
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* Standard version */
+    -webkit-text-fill-color: transparent;
+}
+
+.cube {
+    width: 200px;
+    height: 200px;
+    background-color: #2ECC71;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.cube:hover {
+    background-color: #27AE60;
+    transform: scale(1.05);
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.containerNav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 10px 0;
+    /* Add some padding for better spacing */
+    background-color: #ffffff;
+    /* Optional: Add a background color to make it more visible */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Optional: Add some shadow for better visibility */
+}
+
+.containerNav div {
+    margin: 0 10px;
+    /* Add some margin to space out the items */
+}
+
+.containerNav a {
+    text-decoration: none;
+    color: #333;
+    /* Ensure the text color is visible */
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #333;
+    background: -webkit-linear-gradient(#2ECC71, #3498DB);
+    background: linear-gradient(#2ECC71, #3498DB);
+    /* Standard version */
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* Standard version */
+    -webkit-text-fill-color: transparent;
+}
+
+.cube {
+    width: 200px;
+    height: 200px;
+    background-color: #2ECC71;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.cube:hover {
+    background-color: #27AE60;
+    transform: scale(1.05);
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

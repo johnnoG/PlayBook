@@ -95,8 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     );
 
     if ($stmt->execute()) {
-        // Redirect to MainPage.html after successful insertion
-        header('Location: http://toharhermon959.byethost9.com/PlayBook/front-end/components/MainPage.html');
+        // Redirect to main-page.html after successful insertion
+        header('Location: http://toharhermon959.byethost9.com/PlayBook/pages/main-page.html');
         exit(); // Ensure script stops executing after the redirection
     } else {
         echo "Error: " . $stmt->error;

@@ -10,14 +10,14 @@
     <nav>
       <div class="container">
         <div>
-          <a href="#"><span>Home</span></a>
+          <a  href="./main-page.html"><span>Home</span></a>
         </div>
-        <div><a href="#" onclick="needToLog()">Profile</a></div>
-        <div><a href="#" onclick="needToLog()">My games</a></div>
+        <div> <a href="#" onclick="navigateToPage('./about-me.html')">Profile</a></div>
+        <div><a href="#" onclick="navigateToPage('./my-games.html')">My games</a></div>
         <div><a href="#" onclick="openForm()">Log in</a></div>
       </div>
     </nav>
-    <form id="regForm" action="../../back-end/src/services/sign-up.php" method="post" enctype="multipart/form-data">
+    <form id="regForm" action="../services/sign-up.php" method="post" enctype="multipart/form-data">
       <h1>Register:</h1>
     
       <div class="tab">
@@ -95,7 +95,7 @@
         <div style="float: right">
           <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
           <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
-          <button type="submit">Submit</button>
+         
         </div>
       </div>
     
@@ -114,7 +114,7 @@
     </form>
     <div class="form-popup" id="myForm">
       <form
-        action="../../back-end/src/services/verify-user.php"
+        action="../services/verify-user.php"
         method="post"
         class="form-container"
       >
