@@ -45,7 +45,7 @@ function checkUserVerification() {
 function needToLog() {
   if (!checkUserVerification()) {
     alert("You need to log in!");
-    window.location.href = "sign-in.html";
+    window.location.href = "sign-up.html";
   }
 }
 
@@ -54,6 +54,6 @@ function navigateToPage(page) {
     window.location.href = page;
   } else {
     alert("You need to log in!");
-    window.location.href = "sign-in.html";
+    window.location.href = "sign-up.html";
   }
 }
