@@ -1,38 +1,45 @@
 <?php
 require_once 'db.php';
 
+header('Content-Type: application/json');
+
+if (!isset($_GET['email'])) {
+    echo json_encode(['success' => false, 'message' => 'Email parameter is missing.']);
+    exit();
+}
+
+$email = $_GET['email'];
+
 $db = Database::getInstance();
 $conn = $db->getConnection();
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $email = $_GET['email']; // Assuming email is passed as a query parameter
+if ($conn->connect_error) {
+    echo json_encode(['success' => false, 'message' => 'Database connection failed: ' . $conn->connect_error]);
+    exit();
+}
 
-    // Prepare and execute the query
-    $query = "SELECT Email, FullName, Birthday, StrongFoot, PreferredPosition, Nickname, City, Rating, Picture, Phone FROM Players WHERE Email = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
+$query = "SELECT FullName, Birthday, Age, City, PreferredPosition, Email, Phone, StrongFoot, Gender, Picture, Rating FROM Players WHERE Email = ?";
+$stmt = $conn->prepare($query);
 
-    if ($result->num_rows > 0) {
-        $userData = $result->fetch_assoc();
-        $userData['Age'] = calculateAge($userData['Birthday']); // Add Age calculation
+if (!$stmt) {
+    echo json_encode(['success' => false, 'message' => 'Prepare statement failed: ' . $conn->error]);
+    exit();
+}
 
-        echo json_encode(['success' => true, 'data' => $userData]);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'User not found.']);
-    }
+$stmt->bind_param("s", $email);
 
-    $stmt->close();
+if (!$stmt->execute()) {
+    echo json_encode(['success' => false, 'message' => 'Execute statement failed: ' . $stmt->error]);
+    exit();
+}
+
+$result = $stmt->get_result();
+if ($result->num_rows > 0) {
+    $user = $result->fetch_assoc();
+    echo json_encode(['success' => true, 'data' => $user]);
 } else {
-    echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
+    echo json_encode(['success' => false, 'message' => 'User not found.']);
 }
 
-// Helper function to calculate age
-function calculateAge($birthday)
-{
-    $birthDate = new DateTime($birthday);
-    $currentDate = new DateTime();
-    $age = $currentDate->diff($birthDate)->y;
-    return $age;
-}
+$stmt->close();
+$conn->close();
