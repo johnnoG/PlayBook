@@ -2,6 +2,7 @@
 require_once 'db.php';
 
 header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
 
 if (!isset($_GET['email'])) {
     echo json_encode(['success' => false, 'message' => 'Email parameter is missing.']);

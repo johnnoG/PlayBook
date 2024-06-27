@@ -1,8 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
   const email = "user@example.com"; // Replace with the actual user's email or obtain it dynamically
-  fetch(`../services/player-profile.php?email=${email}`)
+  fetch(
+    `http://toharhermon959.byethost9.com/PlayBook/services/player-profile.php?email=${email}`
+  )
     .then((response) => {
       if (!response.ok) {
+        console.info("Response", response.body);
         throw new Error("Network response was not ok " + response.statusText);
       }
       console.info("Response", response.body);
