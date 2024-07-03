@@ -1,11 +1,11 @@
 <?php
 require_once 'db.php';
 
+session_start(); // Start or resume a session
+
 $db = Database::getInstance();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    session_start(); // Start or resume a session
-
     $email = $_POST['email'];
     $password = $_POST['psw'];
 
@@ -36,22 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_result($stored_password);
         $stmt->fetch();
 
-        // Debugging: Check if stored_password is fetched correctly
-        error_log("Stored Password from DB: " . $stored_password);
-
         if ($password === $stored_password) {
-            // Debugging: Check if password verification succeeds
-            error_log("Password verification succeeded");
-
-            // Set session variable for verified user
             $_SESSION['user_verified'] = true;
+            $_SESSION['user_email'] = $email; // Store email in session
 
             // Redirect to main-page.html after successful login
             header("Location: http://toharhermon959.byethost9.com/PlayBook/pages/main-page.html");
             exit();
         } else {
-            // Debugging: Check if password verification fails
-            error_log("Password verification failed");
             echo json_encode(['success' => false, 'message' => 'Invalid email or password.']);
         }
     } else {

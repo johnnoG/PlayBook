@@ -1,14 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const email = "user@example.com"; // Replace with the actual user's email or obtain it dynamically
   fetch(
-    `http://toharhermon959.byethost9.com/PlayBook/services/player-profile.php?email=${email}`
+    "http://toharhermon959.byethost9.com/PlayBook/services/player-profile.php",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
   )
     .then((response) => {
       if (!response.ok) {
-        console.info("Response", response.body);
         throw new Error("Network response was not ok " + response.statusText);
       }
-      console.info("Response", response.body);
       return response.json();
     })
     .then((data) => {
@@ -62,9 +65,34 @@ function saveChanges() {
   let save = document.getElementById("saveChanges");
   let newtxt = document.querySelectorAll(".new_text");
   let arrP = document.querySelectorAll(".data");
+  let updatedData = {};
+
   for (let i = 0; i < arrP.length; i++) {
     arrP[i].innerHTML = newtxt[i].value;
+    let key = arrP[i].id;
+    updatedData[key] = newtxt[i].value;
   }
+
   ed.style.display = "block";
   save.style.display = "none";
+
+  fetch(
+    "http://toharhermon959.byethost9.com/PlayBook/services/update-profile.php",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    }
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        console.log("Profile updated successfully");
+      } else {
+        console.error("Failed to update profile:", data.message);
+      }
+    })
+    .catch((error) => console.error("Error updating profile:", error));
 }
