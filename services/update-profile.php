@@ -3,6 +3,10 @@ require_once 'db.php';
 
 session_start(); // Start or resume a session
 header('Content-Type: application/json');
+header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_verified']) || !$_SESSION['user_verified']) {
@@ -10,7 +14,6 @@ if (!isset($_SESSION['user_verified']) || !$_SESSION['user_verified']) {
     exit();
 }
 
-$input = json_decode(file_get_contents('php://input'), true);
 $email = $_SESSION['user_email']; // Get email from session
 
 $db = Database::getInstance();
@@ -21,28 +24,34 @@ if ($conn->connect_error) {
     exit();
 }
 
-$fields = ['FullName', 'Birthday', 'Age', 'City', 'PreferredPosition', 'Email', 'Phone', 'StrongFoot', 'Gender', 'Picture', 'Rating'];
-$updates = [];
-$params = [];
-$types = '';
+// Get JSON input
+$input = json_decode(file_get_contents('php://input'), true);
 
-foreach ($fields as $field) {
-    if (isset($input[$field])) {
-        $updates[] = "$field = ?";
-        $params[] = $input[$field];
-        $types .= 's'; // Assuming all fields are strings. Adjust the types accordingly.
-    }
-}
-
-if (empty($updates)) {
-    echo json_encode(['success' => false, 'message' => 'No fields to update.']);
+if (json_last_error() !== JSON_ERROR_NONE) {
+    echo json_encode(['success' => false, 'message' => 'Invalid JSON input.']);
     exit();
 }
 
-$query = "UPDATE Players SET " . implode(', ', $updates) . " WHERE Email = ?";
-$params[] = $email;
-$types .= 's';
+// Validate and sanitize input
+$fullName = $input['FullName'] ?? null;
+$birthday = $input['Birthday'] ?? null;
+$age = $input['Age'] ?? null;
+$city = $input['City'] ?? null;
+$preferredPosition = $input['PreferredPosition'] ?? null;
+$phone = $input['Phone'] ?? null;
+$strongFoot = $input['StrongFoot'] ?? null;
+$gender = $input['Gender'] ?? null;
+$picture = $input['Picture'] ?? null;
+$rating = $input['Rating'] ?? null;
 
+// Ensure all required fields are present
+if (!$fullName || !$birthday || !$age || !$city || !$preferredPosition || !$phone || !$strongFoot || !$gender || !$picture || !$rating) {
+    echo json_encode(['success' => false, 'message' => 'Missing required fields.']);
+    exit();
+}
+
+// Update user profile
+$query = "UPDATE Players SET FullName=?, Birthday=?, Age=?, City=?, PreferredPosition=?, Phone=?, StrongFoot=?, Gender=?, Picture=?, Rating=? WHERE Email=?";
 $stmt = $conn->prepare($query);
 
 if (!$stmt) {
@@ -50,14 +59,18 @@ if (!$stmt) {
     exit();
 }
 
-$stmt->bind_param($types, ...$params);
+$stmt->bind_param("ssissssssss", $fullName, $birthday, $age, $city, $preferredPosition, $phone, $strongFoot, $gender, $picture, $rating, $email);
 
 if (!$stmt->execute()) {
     echo json_encode(['success' => false, 'message' => 'Execute statement failed: ' . $stmt->error]);
     exit();
 }
 
-echo json_encode(['success' => true, 'message' => 'Profile updated successfully.']);
+if ($stmt->affected_rows > 0) {
+    echo json_encode(['success' => true, 'message' => 'Profile updated successfully.']);
+} else {
+    echo json_encode(['success' => false, 'message' => 'No changes made to profile.']);
+}
 
 $stmt->close();
 $conn->close();

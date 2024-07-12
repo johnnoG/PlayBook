@@ -3,6 +3,9 @@ require_once 'db.php';
 
 session_start(); // Start or resume a session
 header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_verified']) || !$_SESSION['user_verified']) {
