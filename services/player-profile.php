@@ -1,15 +1,19 @@
 <?php
 require_once 'db.php';
 
-session_start(); // Start or resume a session
+session_start();
 header('Content-Type: application/json');
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
+
+function log_error($message)
+{
+    error_log($message, 3, '/path/to/your/logs/error.log'); // Change the path to your log file
+}
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_verified']) || !$_SESSION['user_verified']) {
-    echo json_encode(['success' => false, 'message' => 'User not logged in.']);
+    $error_message = 'User not logged in.';
+    log_error($error_message);
+    echo json_encode(['success' => false, 'message' => $error_message]);
     exit();
 }
 
@@ -19,7 +23,9 @@ $db = Database::getInstance();
 $conn = $db->getConnection();
 
 if ($conn->connect_error) {
-    echo json_encode(['success' => false, 'message' => 'Database connection failed: ' . $conn->connect_error]);
+    $error_message = 'Database connection failed: ' . $conn->connect_error;
+    log_error($error_message);
+    echo json_encode(['success' => false, 'message' => $error_message]);
     exit();
 }
 
@@ -27,14 +33,18 @@ $query = "SELECT FullName, Birthday, Age, City, PreferredPosition, Email, Phone,
 $stmt = $conn->prepare($query);
 
 if (!$stmt) {
-    echo json_encode(['success' => false, 'message' => 'Prepare statement failed: ' . $conn->error]);
+    $error_message = 'Prepare statement failed: ' . $conn->error;
+    log_error($error_message);
+    echo json_encode(['success' => false, 'message' => $error_message]);
     exit();
 }
 
 $stmt->bind_param("s", $email);
 
 if (!$stmt->execute()) {
-    echo json_encode(['success' => false, 'message' => 'Execute statement failed: ' . $stmt->error]);
+    $error_message = 'Execute statement failed: ' . $stmt->error;
+    log_error($error_message);
+    echo json_encode(['success' => false, 'message' => $error_message]);
     exit();
 }
 
@@ -43,7 +53,9 @@ if ($result->num_rows > 0) {
     $user = $result->fetch_assoc();
     echo json_encode(['success' => true, 'data' => $user]);
 } else {
-    echo json_encode(['success' => false, 'message' => 'User not found.']);
+    $error_message = 'User not found.';
+    log_error($error_message);
+    echo json_encode(['success' => false, 'message' => $error_message]);
 }
 
 $stmt->close();

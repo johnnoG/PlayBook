@@ -1,42 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  fetch(
-    "http://toharhermon959.byethost9.com/PlayBook/services/player-profile.php",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  )
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      if (data.success) {
-        const user = data.data;
-        document.getElementById("position").textContent =
-          user.PreferredPosition;
-        document.getElementById("about").textContent = user.FullName;
-        document.getElementById("birthday").textContent = user.Birthday;
-        document.getElementById("age").textContent = user.Age;
-        document.getElementById("city").textContent = user.City;
-        document.getElementById("preferred-position").textContent =
-          user.PreferredPosition;
-        document.getElementById("email").textContent = user.Email;
-        document.getElementById("phone").textContent = user.Phone;
-        document.getElementById("strong-foot").textContent = user.StrongFoot;
-        document.getElementById("gender").textContent = user.Gender;
-        document.getElementById("profile-picture").src =
-          user.Picture || "https://bootdey.com/img/Content/avatar/avatar7.png";
-        document.getElementById("rating").textContent = user.Rating;
-      } else {
-        console.error("Failed to fetch user data:", data.message);
-      }
-    })
-    .catch((error) => console.error("Error fetching user data:", error));
+  fetchUserProfile();
 });
 
 function profile() {
@@ -95,4 +58,40 @@ function saveChanges() {
       }
     })
     .catch((error) => console.error("Error updating profile:", error));
+}
+
+function fetchUserProfile() {
+  var xhr = new XMLHttpRequest();
+  xhr.open(
+    "POST",
+    "http://toharhermon959.byethost9.com/PlayBook/services/player-profile.php",
+    false
+  );
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send();
+
+  if (xhr.status === 200) {
+    var response = JSON.parse(xhr.responseText);
+    if (response.success) {
+      const user = response.data;
+      document.getElementById("position").textContent = user.PreferredPosition;
+      document.getElementById("about").textContent = user.FullName;
+      document.getElementById("birthday").textContent = user.Birthday;
+      document.getElementById("age").textContent = user.Age;
+      document.getElementById("city").textContent = user.City;
+      document.getElementById("preferred-position").textContent =
+        user.PreferredPosition;
+      document.getElementById("email").textContent = user.Email;
+      document.getElementById("phone").textContent = user.Phone;
+      document.getElementById("strong-foot").textContent = user.StrongFoot;
+      document.getElementById("gender").textContent = user.Gender;
+      document.getElementById("profile-picture").src =
+        user.Picture || "https://bootdey.com/img/Content/avatar/avatar7.png";
+      document.getElementById("rating").textContent = user.Rating;
+    } else {
+      console.error("Failed to fetch user data:", response.message);
+    }
+  } else {
+    console.error("Error fetching user data:", xhr.statusText);
+  }
 }
