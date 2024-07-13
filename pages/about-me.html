@@ -1,3 +1,25 @@
+<?php
+// Start the session and check if the user is logged in
+session_start();
+
+if (!isset($_SESSION['user_verified']) || !$_SESSION['user_verified']) {
+    die("User not logged in.");
+}
+
+$servername = "sql305.byethost9.com";
+$username = "b9_36704350";
+$password = "@ToharYO123";
+$dbname = "b9_36704350_PlayBook";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
+$email = $_SESSION['user_email']; // Get email from session $sql = "SELECT
+FullName, Birthday, Age, City, PreferredPosition, Email, Phone, StrongFoot,
+Gender, Picture, Rating FROM Players WHERE Email = ?"; $stmt =
+$conn->prepare($sql); $stmt->bind_param("s", $email); $stmt->execute(); $result
+= $stmt->get_result(); $user = $result->fetch_assoc(); $stmt->close();
+$conn->close(); if (!$user) { die("User not found."); } ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,44 +52,65 @@
             <div class="about-text go-to">
               <h3 class="dark-color">Profile</h3>
               <h6 class="theme-color lead">
-                Soccer player in position <span id="position">database</span>
+                Soccer player in position
+                <span id="position"
+                  ><?php echo htmlspecialchars($user['PreferredPosition']); ?></span
+                >
               </h6>
-              <p id="about">data base about</p>
+              <p id="about">
+                <?php echo htmlspecialchars($user['FullName']); ?>
+              </p>
               <div class="row about-list">
                 <div class="col-md-6">
                   <div class="media">
                     <label>Birthday</label>
-                    <p class="data" id="birthday">data base</p>
+                    <p class="data" id="birthday">
+                      <?php echo htmlspecialchars($user['Birthday']); ?>
+                    </p>
                   </div>
                   <div class="media">
                     <label>Age</label>
-                    <p class="data" id="age">data base</p>
+                    <p class="data" id="age">
+                      <?php echo htmlspecialchars($user['Age']); ?>
+                    </p>
                   </div>
                   <div class="media">
                     <label>City</label>
-                    <p class="data" id="city">data base</p>
+                    <p class="data" id="city">
+                      <?php echo htmlspecialchars($user['City']); ?>
+                    </p>
                   </div>
                   <div class="media">
                     <label>Position</label>
-                    <p class="data" id="preferred-position">data base</p>
+                    <p class="data" id="preferred-position">
+                      <?php echo htmlspecialchars($user['PreferredPosition']); ?>
+                    </p>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="media">
                     <label>E-mail</label>
-                    <p class="data" id="email">data base</p>
+                    <p class="data" id="email">
+                      <?php echo htmlspecialchars($user['Email']); ?>
+                    </p>
                   </div>
                   <div class="media">
                     <label>Phone</label>
-                    <p class="data" id="phone">data base</p>
+                    <p class="data" id="phone">
+                      <?php echo htmlspecialchars($user['Phone']); ?>
+                    </p>
                   </div>
                   <div class="media">
                     <label>Foot</label>
-                    <p class="data" id="strong-foot">data base</p>
+                    <p class="data" id="strong-foot">
+                      <?php echo htmlspecialchars($user['StrongFoot']); ?>
+                    </p>
                   </div>
                   <div class="media">
                     <label>Gender</label>
-                    <p class="data" id="gender">data base</p>
+                    <p class="data" id="gender">
+                      <?php echo htmlspecialchars($user['Gender']); ?>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -77,9 +120,9 @@
             <div class="about-avatar">
               <img
                 id="profile-picture"
-                src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                src="<?php echo htmlspecialchars($user['Picture']) ?: 'https://bootdey.com/img/Content/avatar/avatar7.png'; ?>"
                 title=""
-                alt=""
+                alt="Profile Picture"
               />
             </div>
           </div>
@@ -94,7 +137,9 @@
             </div>
             <div class="col-6 col-lg-3">
               <div class="count-data text-center">
-                <h6 class="count h2" id="rating">data base</h6>
+                <h6 class="count h2" id="rating">
+                  <?php echo htmlspecialchars($user['Rating']); ?>
+                </h6>
                 <p class="m-0px font-w-600">Rating</p>
               </div>
             </div>

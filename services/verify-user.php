@@ -40,8 +40,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['user_verified'] = true;
             $_SESSION['user_email'] = $email; // Store email in session
 
-            // Redirect to main-page.html after successful login
-            header("Location: http://toharhermon959.byethost9.com/PlayBook/pages/main-page.html");
+            // Debugging session data
+            echo '<pre>';
+            print_r($_SESSION);
+            echo '</pre>';
+
+            // Redirect to profile page after successful login
+            header("Location: ../services/player-profile.php");
             exit();
         } else {
             echo json_encode(['success' => false, 'message' => 'Invalid email or password.']);
