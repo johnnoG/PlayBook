@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Israel Cities</title>
+    <link rel="stylesheet" href="../styles/game-location.css" />
+    <script>
+      function navigateToCity(city) {
+        window.location.href = "../locations/"+ city + ".php";
+      }
+    </script>
+  </head>
+<style>
+     .containerNav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 10px 0;
+    /* Add some padding for better spacing */
+    background-color: #ffffff;
+    /* Optional: Add a background color to make it more visible */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Optional: Add some shadow for better visibility */
+}
+    </style>
+</head>
+<body>
+        <div class="containerNav">
+            <div><a href="../pages/main-page.html"><span>Home</span></a></div>
+            <div><a href="../services/player-profile.php" onclick="profile()">Profile</a></div>
+            <div><a href="../services/my-games.php">My games</a></div>
+            <div><a href="../pages/game-location.html">Book a game</a></div>
+            <div><a href="../services/log-out.php">Log Out</a></div>
+        </div>
+    <h1>Where do you want to play?</h1>
+    <div class="container">
+      <div class="cube" onclick="navigateToCity('Jerusalem')">Jerusalem</div>
+      <div class="cube" onclick="navigateToCity('Haifa')">Haifa</div>
+      <div class="cube" onclick="navigateToCity('Tel_Aviv')">Tel Aviv</div>
+      <div class="cube" onclick="navigateToCity('Yokneam')">Yokneam</div>
+      <div class="cube" onclick="navigateToCity('BeerSheba')">BeerSheba</div>
+
+    </div>
+  </body>
+</html>

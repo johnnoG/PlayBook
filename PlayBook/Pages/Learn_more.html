@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayBook - Join Local Games Easily</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .container.shine {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1), 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+        h1 {
+            color: #333;
+            font-size: 28px;
+            text-align: center;
+        }
+        p {
+            color: #555;
+            font-size: 18px;
+            text-align: justify;
+        }
+        .containerNav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="containerNav">
+        <div><a href="main-page.html"><span>Home</span></a></div>
+        <div><a href="../services/player-profile.php" onclick="profile()">Profile</a></div>
+        <div><a href="../services/my-games.php">My games</a></div>
+        <div><a href="game-location.html">Book a game</a></div>
+        <div><a href="../services/log-out.php">Log Out</a></div>
+    </div>
+    <div class="container" id="content-container">
+        <h1>Imagine arriving in an unfamiliar place and wanting to join a game of football...</h1>
+        <p>With PlayBook, you can easily find and join local games without the hassle of organizing participants. Register as a player, specify your position, preferred playing foot or hand, and other game details. PlayBook locates nearby fields and lets you sign up for games at specific times. Once enough players join, a game is automatically arranged. Players can rate each other and the facilities, creating a system that matches users by skill level. PlayBook makes it easy to enjoy spontaneous matches and connect with new people, wherever you are.</p>
+    </div>
+
+    <script>
+        const container = document.getElementById('content-container');
+        container.addEventListener('mouseover', () => {
+            container.classList.add('shine');
+        });
+        container.addEventListener('mouseout', () => {
+            container.classList.remove('shine');
+        });
+    </script>
+</body>
+</html>

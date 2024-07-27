@@ -1,0 +1,163 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../styles/main-page.css" />
+    <title>PlayBook</title>
+  </head>
+
+  <body>
+    <header>
+      <img class="Logo" src="../resources/LOGO2.png" />
+
+      <nav>
+        <div class="container">
+          <div>
+            <a href="./main-page.html" onclick="rate()"><span>Home</span></a>
+          </div>
+          <div>
+            <a href="#" onclick="navigateToPage('../services/player-profile.php')">Profile</a>
+          </div>
+          <div>
+            <a href="#" onclick="navigateToPage('../services/my-games.php')">My games</a>
+          </div>
+          <div><a href="#" onclick="openForm()">Log In</a></div>
+          <div><a href="../services/log-out.php">Log Out</a></div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="section1" id="sect1">
+        <div class="FMDiv">Playbook</div>
+        <h3>Find.Book.Play</h3>
+        <div class="mainDiv">
+          <div><a href="./sign-up.html"> Sign up</a></div>
+            <a href="./Learn_more.html">Learn more</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section2">
+        <div>SERVICES</div>
+        <h5>choose one of our great services</h5>
+        <div class="container2">
+          <div class="Sdiv">
+            <!--TODO: will direct to relevnt ui-->
+            <a href="#" onclick="navigateToPage('./game-location.html')"
+              ><img src="../resources/GPS_Logo.jpg"
+            /></a>
+            <div>
+              <h4>Click to find nearby courts</h4>
+              <p class="cube-info">
+                Discover courts near you with ease. Whether you're looking for a
+                place to practice, play a casual game, or join a competitive
+                match, our service will help you find the perfect court. Explore
+                detailed maps and directions to courts in your vicinity and get
+                ready to play!
+              </p>
+            </div>
+          </div>
+
+          <div class="Sdiv">
+            <!--TODO: will direct to relevnt ui-->
+            <a href="#" onclick="navigateToPage('./game-location.html')"
+              ><img src="../resources/Ball_Log.jpg"
+            /></a>
+            <h4>Book a game</h4>
+            <p class="cube-info">
+              Secure your spot on the court!<br />
+              Our easy-to-use booking system allows you to schedule games with
+              just a few clicks. Choose your preferred time, type of sport, and
+              court, and get instant confirmation. Never miss a game again and
+              enjoy seamless planning for all your sporting activities.
+            </p>
+          </div>
+
+          <div class="Sdiv">
+            <!-- TODO: will direct to relevnt ui-->
+            <a href="#" onclick="navigateToPage('../services/player-profile.php')"
+              ><img src="../resources/Star_Logo.jpg"
+            /></a>
+            <h4>See your ratings from other players</h4>
+            <p class="cube-info">
+              Curious about how other players rate your skills? Check out your
+              ratings and feedback from past games. Gain insights into your
+              strengths and areas for improvement. Celebrate your high scores
+              and strive to be the best on the court. Join our community and
+              build your player reputation!<br />
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="form-popup" id="myForm">
+        <form
+          action="../services/verify-user.php"
+          method="post"
+          class="form-container"
+        >
+          <h1>Login</h1>
+
+          <label for="email"><b>Email</b></label>
+          <input
+            id="login-email"
+            type="text"
+            placeholder="Email"
+            name="email"
+            required
+          />
+
+          <label for="psw"><b>Password</b></label>
+          <input
+            id="login-password"
+            type="Password"
+            placeholder="Enter Password"
+            name="psw"
+            required
+          />
+
+          <button type="submit" class="btn">Login</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">
+            Close
+          </button>
+        </form>
+      </div>
+    </main>
+    <fotter>
+      <div class="last-div">
+        <h3>External links</h3>
+        <ul>
+          <li>
+            <a href="https://en.wikipedia.org/wiki/Association_football"
+              >learn about soccer</a
+            >
+          </li>
+          <li>
+            <a href="https://en.wikipedia.org/wiki/Ball_(association_football)"
+              >learn about soccer ball</a
+            >
+          </li>
+          <li>
+            <a href="https://www.youtube.com/watch?v=HgSJdoO5CeI">video</a>
+          </li>
+        </ul>
+      </div>
+      <div class="contact">
+        <h2>For contact</h2>
+        <div><span>Email</span>: TheBest_Playbook@gmail.com</div>
+        <div><span>Phone Number</span>: 0509842614</div>
+        <div><span>Location</span>: Ruppin Academic Center</div>
+        <div ><a href="../services/rateTheSite.php" id="RateUs">Rate Us</a></div>
+        
+      </div>
+      
+    </fotter>
+    <embed
+      src="../resources/clapping.mp3"
+      width="0px"
+      height="0px"
+      autoplay="true"
+      loop="false"
+    />
+    <script src="../scripts/main-page.js"></script>
+  </body>
+</html>
